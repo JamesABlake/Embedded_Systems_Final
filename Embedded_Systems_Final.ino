@@ -1,8 +1,7 @@
-#include "JoyStick.h"
-#include "MainMenu.h"
 #include "Game.h"
-#include <new.h>
+#include "JoyStick.h"
 #include <MD_MAX72xx.h>
+#include <new.h>
 
 #define pinJoyX A13
 #define pinJoyY A14
@@ -15,38 +14,36 @@
 #define pinCS A1
 
 JoyStick joyStick(pinJoyX, pinJoyY, pinJoyS);
-MainMenu mainMenu;
-MD_MAX72XX mx = MD_MAX72XX(MD_MAX72XX::PAROLA_HW, pinData, pinCLK, pinCS, 1); // Arbitrary pins
+MD_MAX72XX mx = MD_MAX72XX(MD_MAX72XX::PAROLA_HW, pinData, pinCLK, pinCS, 1);
 Game game;
 
 uint8_t buffer[8];
 
 void setup() {
-  SetupSerial();
   mx.begin();
-  mx.control(MD_MAX72XX::INTENSITY, MAX_INTENSITY/8);
+  mx.control(MD_MAX72XX::INTENSITY, MAX_INTENSITY / 8);
   randomSeed(analogRead(pinRand));
   game.Setup();
 }
 
 void loop() {
-  // Reset the game when the button is pressed. TODO Change to ButtonDown to prevent disco
-  if(joyStick.IsButtonPressed()) {
+  // Reset the game when the button is pressed.
+  if (joyStick.ButtonDown()) {
     ResetGame();
   }
 
-  // If there's input, put it into result and pass it to the game. TODO Let the game deal with input processing
-  Point result = (Point){0,0};
-  if(joyStick.GetInput(&result))
+  // If there's input, put it into result and pass it to the game.
+  Point result = (Point){ 0, 0 };
+  if (joyStick.GetInput(&result))
     game.direction = result;
 
-  if(game.Update()) {
+  if (game.Update()) {
     ResetGame();
   }
-    
-  
+
   // Pass visuals from the game to the display
-  // Note: The screen is drawn right to left so this needs to be set to the last column and the buffer created inverted
+  // Note: The screen is drawn right to left so this needs to be set to the last
+  // column and the buffer created inverted
   game.GetVisuals(buffer);
   mx.setBuffer(7, 8, buffer);
 }
