@@ -1,22 +1,29 @@
 # Embedded Systems Final
 
-Description:
-  Re-create Worm using the Dot Matrix as a display and the JoyStick as input.
+## Description:
 
-Group: 
-  James Blake - Everything
+Re-create Worm using the Dot Matrix as a display and the JoyStick as input.
 
-Components:
-  Dot Matrix
-  JoyStick
+### Group:
 
-Libraries:
-  MD_MAX72XX (GNU Lesser General Public License v2.1)
+- James Blake - Everything
 
-Context Diagram:
-  JoyStick <-> Arduino <-> Dot Matrix
+### Components:
 
-Sequence Diagram:
+- Dot Matrix
+- JoyStick
+
+### Libraries:
+
+- MD_MAX72XX (GNU Lesser General Public License v2.1)
+
+### Context Diagram:
+
+- JoyStick <-> Arduino <-> Dot Matrix
+
+### Sequence Diagram:
+
+```
   I = Initialization
   L = Loop
 
@@ -25,12 +32,15 @@ Sequence Diagram:
   |<==L
   |-->L
       L==>|
+```
 
-Transition Functions:
-  JoyStick & Arduino
-    ButtonDown()
+### Transition Functions:
 
-  Arduino & Dot Matrix
-    begin()
-    control(...);
-    setBuffer(...);
+- JoyStick & Arduino
+  - ButtonDown()
+
+
+- Arduino & Dot Matrix
+  - begin()
+  - control(...);
+  - setBuffer(...);
