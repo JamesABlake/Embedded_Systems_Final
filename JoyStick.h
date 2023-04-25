@@ -11,8 +11,9 @@ class JoyStick {
 public:
   JoyStick(uint8_t pinX, uint8_t pinY, uint8_t pinS);
 
+  /// Returns true only once after the button is pressed, until it is released
   bool ButtonDown();
-  bool ButtonHeld();
+  /// Gets a point in any 4 cardinal directions based on which way the joystick is moved
   bool GetInput(Point *result);
 
 private:

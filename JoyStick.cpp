@@ -19,10 +19,6 @@ bool JoyStick::ButtonDown() {
   return false;
 }
 
-bool JoyStick::ButtonHeld() {
-  return !digitalRead(pinS);
-}
-
 bool JoyStick::GetInput(Point *direction) {
   int x = 511 - analogRead(pinX);
   int y = 511 - analogRead(pinY);

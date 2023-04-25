@@ -11,7 +11,7 @@ Components:
   JoyStick
 
 Libraries:
-  MD_MAX72XX
+  MD_MAX72XX (GNU Lesser General Public License v2.1)
 
 Context Diagram:
   JoyStick <-> Arduino <-> Dot Matrix
